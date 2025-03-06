@@ -6,10 +6,25 @@
     <title>First Template</title>
 </head>
 <body>
-    <h1>Hello World!</h1>
+    <h1>Create new task</h1>
+    <form action="/task/create" method="post">
+        <input type="text" name="description" required>
+        <input type="submit" value="Create task">
+    </form>
+
+    <h1>To Do List</h1>
     <ul>
         {% for task in tasks %}
-            <li>{{ task }}</li>
+            <li>
+                <form action="/task/update/{{ task.id }}" method="post" style="display: inline;">
+                    <input type="text" name="description" value="{{ task.description }}">
+                    <input type="submit" value="Update">
+                </form>
+                
+                <form action="/task/delete/{{ task.id }}" method="post" style="display: inline;">
+                    <input type="submit" value="Delete">
+                </form>
+            </li>
         {% endfor %}
     </ul>
 </body>
